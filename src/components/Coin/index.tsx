@@ -32,7 +32,7 @@ const Coin = ({ index, player: coinPlayer, xIndex }: CoinType) => {
       className={cn(
         "aspect-square absolute flex items-center justify-center z-0 transition-all duration-200 ease-in",
         {
-          "bg-teal-600": solvedGrid,
+          "bg-teal-500": solvedGrid,
         }
       )}
       style={{ width: `${size}%`, left, top: top }}
@@ -41,8 +41,8 @@ const Coin = ({ index, player: coinPlayer, xIndex }: CoinType) => {
         className={cn(
           "size-3/4  rounded-full border-4 border-slate-500 flex items-center justify-center",
           {
-            "bg-green-500": green,
-            "bg-sky-500": sky,
+            "bg-green-300": green,
+            "bg-sky-300": sky,
             "opacity-80": !coinPlayer,
             "hover:opacity-100 cursor-pointer": !gameOver && !coinPlayer,
           }
@@ -53,8 +53,8 @@ const Coin = ({ index, player: coinPlayer, xIndex }: CoinType) => {
           className={cn(
             "size-4/5 rounded-full flex items-center justify-center",
             {
-              "bg-green-600": green,
-              "bg-sky-600": sky,
+              "bg-green-400": green,
+              "bg-sky-400": sky,
             }
           )}
           style={{
@@ -63,8 +63,8 @@ const Coin = ({ index, player: coinPlayer, xIndex }: CoinType) => {
         >
           <div
             className={cn("size-2/3 rounded-full", {
-              "bg-green-700": green,
-              "bg-sky-700": sky,
+              "bg-green-500": green,
+              "bg-sky-500": sky,
             })}
             style={{
               boxShadow: "black 0px 0px 10px 0px",
