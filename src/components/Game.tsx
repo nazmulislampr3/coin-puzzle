@@ -30,7 +30,7 @@ const Game = () => {
       <div
         className={cn({
           "w-full": device === "ph",
-          "w-2/5": pc,
+          "w-1/3": pc,
         })}
       >
         <div className="w-full h-full">
