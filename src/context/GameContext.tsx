@@ -214,7 +214,7 @@ const GameContextProvider = ({ children }: { children: ReactNode }) => {
 
           setSolvedGrids(slv);
 
-          if (!slvd) {
+          if (!slv) {
             setPlayer((prev) => (prev === 1 ? 2 : 1));
           }
         }, 200);
