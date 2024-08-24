@@ -63,13 +63,16 @@ const GameContextProvider = ({ children }: { children: ReactNode }) => {
     // },
   ]);
   const [solvedGrids, setSolvedGrids] = useState<SolvedGrids>(null);
+  const [slvd, setSlvd] = useState<boolean>(false);
   const [player, setPlayer] = useState<Player>(1);
   const [device, setDevice] = useState<Device>(null);
   const [result, setResult] = useState<boolean>(false);
-  const draw: boolean =
-    !solvedGrids &&
+
+  const draw =
+    !slvd &&
     coins.length === gridUnit * gridUnit &&
     !coins.some(({ index }) => index === -1);
+
   const gameOver = draw || !!solvedGrids;
 
   const restart = () => {
@@ -80,6 +83,7 @@ const GameContextProvider = ({ children }: { children: ReactNode }) => {
       }))
     );
     setSolvedGrids(null);
+    setSlvd(false);
     setPlayer(1);
   };
 
@@ -200,13 +204,16 @@ const GameContextProvider = ({ children }: { children: ReactNode }) => {
           return copy;
         });
 
+        const slv = solved(emptyGridIndex);
+        setSlvd(!!slv);
+
         setTimeout(() => {
           if (generateCoin) {
             generateNewCoin(xIdx);
           }
 
-          const slvd = solved(emptyGridIndex);
-          setSolvedGrids(slvd);
+          setSolvedGrids(slv);
+
           if (!slvd) {
             setPlayer((prev) => (prev === 1 ? 2 : 1));
           }
@@ -220,12 +227,6 @@ const GameContextProvider = ({ children }: { children: ReactNode }) => {
   };
 
   useEffect(() => {
-    setCoins(
-      Array.from({ length: gridUnit }).map((_, index) => ({
-        index: -1,
-        xIndex: index,
-      }))
-    );
     init();
     window.addEventListener("resize", init);
     return () => window.removeEventListener("resize", init);
@@ -241,14 +242,13 @@ const GameContextProvider = ({ children }: { children: ReactNode }) => {
   }, [gridUnit]);
 
   useEffect(() => {
-    if (!!solvedGrids) {
+    if (gameOver) {
       setResult(true);
-
       setTimeout(() => {
         setResult(false);
       }, 2000);
     }
-  }, [solvedGrids]);
+  }, [gameOver]);
 
   return (
     <GameContext.Provider

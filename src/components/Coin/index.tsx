@@ -9,6 +9,7 @@ const Coin = ({ index, player: coinPlayer, xIndex }: CoinType) => {
     player: currentPlayer,
     solvedGrids,
     gameOver,
+    draw,
   } = useGameContext()!;
 
   const size = 100 / gridUnit;
@@ -33,6 +34,7 @@ const Coin = ({ index, player: coinPlayer, xIndex }: CoinType) => {
         "aspect-square absolute flex items-center justify-center z-0 transition-all duration-200 ease-in",
         {
           "bg-teal-500": solvedGrid,
+          "bg-red-500": draw,
         }
       )}
       style={{ width: `${size}%`, left, top: top }}
